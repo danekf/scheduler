@@ -4,6 +4,7 @@ import Show from './Show';
 import Empty from './Empty';
 
 function Appointment(props){
+
   return(
     <article className="appointment">
       <header>{props.time}</header>
