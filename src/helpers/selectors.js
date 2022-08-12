@@ -26,5 +26,22 @@ function getInterview (state, interview) {
 
 };
 
-export {getAppointmentsForDay, getInterview}
+function getInterviewersForDay(state, day){
+
+  const interviewers = [];
+
+  for (let checkDay of state.days){
+    if(checkDay.name === day){
+      for (let interviewer of checkDay.interviewers){      
+        interviewers.push(state.interviewers[interviewer]);
+      }
+    }
+  }
+
+  return interviewers;
+
+
+};
+
+export {getAppointmentsForDay, getInterview, getInterviewersForDay}
 

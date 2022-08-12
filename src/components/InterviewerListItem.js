@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, {useState} from 'react';
 import classNames from "classnames";
 import "components/InterviewerListItem.scss";
