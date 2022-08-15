@@ -9,6 +9,7 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "help
 
 
 
+
 export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
@@ -18,12 +19,53 @@ export default function Application(props) {
     interviewers: {}
   });
 
+  function bookInterview(id, interview) {
+    const appointmentsURL = `/api/appointments/${id}`;
+    const appointment = {
+      ...state.appointments[id],
+      interview: {...interview}
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    }
+
+    console.log(id, interview);
+    return axios.put(appointmentsURL, {interview})
+            .then(() => {
+              setState({...state, appointments});
+            })
+  };
+
+  function cancelInterview(id, interview){
+    const appointmentsURL = `/api/appointments/${id}`;
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: {...interview}
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    }
+
+    return axios.put(appointmentsURL, {interview})
+    .then(() => {
+      setState({...state, appointments});
+    })
+
+  };
+
+
+
   const appointments = getAppointmentsForDay(state, state.day);
 
   const schedule = appointments.map((appointment) => {
 
     const interview = getInterview(state, appointment.interview);
-    const interviewers = getInterviewersForDay(state, appointment.interviewers);
+    const interviewers = getInterviewersForDay(state, state.day);
 
     return (
       <Appointment
@@ -32,6 +74,8 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview = {bookInterview}
+        cancelInterview = {cancelInterview}
       />
     );
   });
