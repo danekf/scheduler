@@ -20,13 +20,6 @@ function useVisualMode (initialMode){
     }
   }
 
-  function doubleBack() {
-    //ensure we cannot go further back than initialMode
-    if (history.length > 1){  
-      //remove latest item from history array.
-      setHistory((prev) => prev.slice(0, -1));
-    }
-  }
 
   return {mode: history[history.length-1], transition, back};
 };
