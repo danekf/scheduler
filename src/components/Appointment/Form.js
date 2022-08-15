@@ -12,7 +12,7 @@ import Empty from './Empty';
 
 function Form(props){
   const [student, setStudent] = useState(props.student || "");
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [interviewer, setInterviewer] = useState(props.interviewer.id || null);
 
   function cancel(){
     reset();

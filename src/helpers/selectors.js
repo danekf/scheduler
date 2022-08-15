@@ -10,6 +10,7 @@
   }
 
   return appointments;
+  //there is definitely another way to do this for larger data sets. But i dont want to break anything
 };
 
 function getInterview (state, interview) {

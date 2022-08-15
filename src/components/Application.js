@@ -31,27 +31,26 @@ export default function Application(props) {
       [id]: appointment
     }
 
-    console.log(id, interview);
+
     return axios.put(appointmentsURL, {interview})
             .then(() => {
               setState({...state, appointments});
             })
   };
 
-  function cancelInterview(id, interview){
+  function cancelInterview(id){
     const appointmentsURL = `/api/appointments/${id}`;
-
     const appointment = {
       ...state.appointments[id],
-      interview: {...interview}
+      interview: null
     };
 
     const appointments = {
       ...state.appointments,
       [id]: appointment
     }
-
-    return axios.put(appointmentsURL, {interview})
+  
+    return axios.delete(appointmentsURL)
     .then(() => {
       setState({...state, appointments});
     })
@@ -98,7 +97,7 @@ export default function Application(props) {
       });
   },[]);
 
-  console.log(state.interviewers);
+
 
   
   return (
