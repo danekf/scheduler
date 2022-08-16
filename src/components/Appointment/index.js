@@ -55,7 +55,7 @@ function Appointment(props){
   }
   
   return(
-    <article className="appointment">
+    <article className="appointment" data-testid="appointment">
       <header>{props.time}</header>
       {mode === SHOW && <Show student = {props.interview.student} interviewer = {props.interview.interviewer || null}  onDelete={()=>transition(CONFIRM)} onEdit={()=>transition(EDIT)}/> }
       {mode === EMPTY && <Empty onAdd ={()=> transition(CREATE)} />}
