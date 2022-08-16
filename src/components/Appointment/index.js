@@ -59,7 +59,7 @@ function Appointment(props){
       <header>{props.time}</header>
       {mode === SHOW && <Show student = {props.interview.student} interviewer = {props.interview.interviewer || null}  onDelete={()=>transition(CONFIRM)} onEdit={()=>transition(EDIT)}/> }
       {mode === EMPTY && <Empty onAdd ={()=> transition(CREATE)} />}
-      {mode === CREATE && <Form onCancel = {back} interviewers = {props.interviewers} onSave={save} interviewer=''/>}
+      {mode === CREATE && <Form onCancel = {back} interviewers = {props.interviewers} onSave={save} />}
       {mode === SAVING && <Status onClick = 'Saving Appointment'/>}
       {mode === CONFIRM && <Confirm onCancel = {back} onConfirm = {remove}/>}
       {mode === DELETING && <Status onClick = 'Deleting Appointment'/>}
