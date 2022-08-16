@@ -40,9 +40,30 @@ function getInterviewersForDay(state, day){
   }
 
   return interviewers;
-
+  
 
 };
 
-export {getAppointmentsForDay, getInterview, getInterviewersForDay}
+function updateSpots(state){
+
+  const days = [...state.days];
+  let spots = 0;
+
+  for (let day of days){
+    if (day.name === state.day){      
+      for(let appointment of day.appointments){
+        if(state.appointments[appointment].interview === null){
+          spots ++;
+        }
+      }
+      day.spots = spots;
+    }
+  }  
+  return days;
+}
+
+
+
+
+export {getAppointmentsForDay, getInterview, getInterviewersForDay, updateSpots}
 

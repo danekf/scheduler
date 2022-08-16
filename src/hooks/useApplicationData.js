@@ -1,17 +1,19 @@
 import axios from "axios";
 import {useState, useEffect} from "react";
+import { updateSpots } from "helpers/selectors";
+
 
 function useApplicationData (){
 
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-
     appointments: {},
     interviewers: {}
   });
 
   const setDay = (day) => setState({ ...state, day });
+    
 
   function bookInterview(id, interview) {
     const appointmentsURL = `/api/appointments/${id}`;
@@ -25,11 +27,15 @@ function useApplicationData (){
       [id]: appointment
     }
 
+    
 
     return axios.put(appointmentsURL, {interview})
             .then(() => {
-              setState({...state, appointments});
+              const newState ={...state, appointments};
+              const days = updateSpots(newState);
+              setState({...newState, days});
             })
+
   };
 
   function cancelInterview(id){
@@ -46,7 +52,9 @@ function useApplicationData (){
   
     return axios.delete(appointmentsURL)
     .then(() => {
-      setState({...state, appointments});
+      const newState ={...state, appointments};
+      const days = updateSpots(newState);
+      setState({...newState, days });
     })
 
   };
@@ -63,15 +71,15 @@ function useApplicationData (){
     .then((all) => {    
       setState(prev => ({ ...prev, days:[...all[0].data], appointments:{...all[1].data}, interviewers: {...all[2].data} }));      
       });
-  },[]);
+    },[]);
+      
 
-
-return {
-  state,
-  bookInterview,
-  cancelInterview,
-  setDay
-}
+  return {
+    state,
+    bookInterview,
+    cancelInterview,
+    setDay
+  }
 
 }
 

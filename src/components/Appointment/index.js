@@ -20,7 +20,7 @@ const ERROR_DELETE = 'ERROR_DELETE';
 
 
 function Appointment(props){
-// eslint-disable-next-line
+
   const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY);
 
   function save(name, interviewer){
@@ -64,8 +64,8 @@ function Appointment(props){
       {mode === CONFIRM && <Confirm onCancel = {back} onConfirm = {remove}/>}
       {mode === DELETING && <Status onClick = 'Deleting Appointment'/>}
       {mode === EDIT && <Form onCancel = {back} interviewers = {props.interviewers} onSave={save} interviewer = {props.interview.interviewer} student = {props.interview.student}/>}
-      {mode === ERROR_SAVE && <Error onClose = {back}/>}
-      {mode === ERROR_DELETE && <Error onClose = {back}/>}            
+      {mode === ERROR_SAVE && <Error errorMessage = 'Error: Could not save appointment' onClose = {back}/>}
+      {mode === ERROR_DELETE && <Error errorMessage = 'Error: Could not delete appointment' onClose = {back}/>}            
     </article>
   );
 }
