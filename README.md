@@ -3,6 +3,8 @@
 [![React][React.js]][React-url]
 # Interview Scheduler
 
+<a><img src = "images/Banner.png" alt="Banner"</img></a>
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
