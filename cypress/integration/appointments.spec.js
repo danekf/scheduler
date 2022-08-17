@@ -53,7 +53,27 @@ describe("Appointments", () =>{
     //confirm save 
     cy.contains(".appointment__card--show", "Lydia Miller-Jones");
     cy.contains(".appointment__card--show", "Tori Malcolm");
+  });
 
+  it("Should cancel an interview" , ()=> {
+    //find element with interview for specific name
+    cy.contains(".appointment__card--show", "Archie Cohen");
+        
+    //get Delete button and click it by force since it is not visible, even with mouse over within cypress
+    cy.get("[alt=Delete").click({force: true});
+
+    //get the Confirm button by alt text and click it
+    cy.contains("Confirm").click();
+
+    //confirm that it is deleting and that the form is deleted
+    cy.contains("Deleting Appointment").should("exist");
+
+    //confirm that the deleting status is gone
+    cy.contains("Deleting Appointment").should("not.exist");
+
+    //ensure that the appointment is truly gone by making sure the element with name is not here
+    cy.contains(".appointment__card--show", "Archie Cohen").should("not.exist");
+    
 
   });
 
