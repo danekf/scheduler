@@ -3,6 +3,8 @@ import {useState} from "react";
 function useVisualMode (initialMode){
   const [history, setHistory] = useState([initialMode])
 
+
+  //transitions to new mode
   function transition(mode, replace) {
     if (replace){
       //if we are replacing, remove last item prior to setting new mode, which is accomplished with out back function;
