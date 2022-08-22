@@ -3,11 +3,10 @@ import {useState} from "react";
 function useVisualMode (initialMode){
   const [history, setHistory] = useState([initialMode])
 
-
-  //transitions to new mode
+  //transitions to new mode, taking in the new mode as well as "does this replace the last mode in history instead of just being added"
   function transition(mode, replace) {
+    //if we are replacing, remove last item prior to setting new mode, which is accomplished with out back function;
     if (replace){
-      //if we are replacing, remove last item prior to setting new mode, which is accomplished with out back function;
       back();
     }
     //add new mode to history before setting
@@ -21,8 +20,6 @@ function useVisualMode (initialMode){
       setHistory((prev) => prev.slice(0, -1));
     }
   }
-
-
   return {mode: history[history.length-1], transition, back};
 };
 

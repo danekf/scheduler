@@ -16,8 +16,8 @@ function useApplicationData (){
 
   //helper to book/update interview  
   function bookInterview(id, interview) {
-    //set constants for request
     const appointmentsURL = `/api/appointments/${id}`;
+
     //set the appointment with correct data for axios request
     const appointment = {
       ...state.appointments[id],
@@ -40,7 +40,6 @@ function useApplicationData (){
   };
   //helper to cancel an interview
   function cancelInterview(id){
-    //set constants for request
     const appointmentsURL = `/api/appointments/${id}`;
     //set the appointment with correct data for axios request, interview here being NULL, since we are removing interview
     const appointment = {
@@ -64,7 +63,6 @@ function useApplicationData (){
 
   //Load all appointments on first load
   useEffect( () => {
-    //get data for all days, appointments and interviewers
     const daysURL= `/api/days`;
     const appointmentsURL = '/api/appointments';
     const interviewersURL = '/api/interviewers';
